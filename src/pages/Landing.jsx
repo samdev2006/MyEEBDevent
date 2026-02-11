@@ -13,7 +13,6 @@ const TypewriterText = ({ texts, speed = 100, deleteSpeed = 50, pauseTime = 2000
 
 
   useEffect(() => {
-  //  toute les 5 secondes si la labbre de lignotemment n'est pas affiché tu l'affiche, si elle est affiché tu l'enlève
     const cursorInterval = setInterval(() => {
       setShowCursor(prev => !prev);
     }, 500);
@@ -26,19 +25,15 @@ const TypewriterText = ({ texts, speed = 100, deleteSpeed = 50, pauseTime = 2000
     
     const timeout = setTimeout(() => {
       if (!isDeleting) {
-        // Mode écriture
         if (displayText.length < currentText.length) {
           setDisplayText(currentText.substring(0, displayText.length + 1));
         } else {
-          // Texte complet, attendre puis commencer à effacer
           setTimeout(() => setIsDeleting(true), pauseTime);
         }
       } else {
-        // Mode effacement
         if (displayText.length > 0) {
           setDisplayText(currentText.substring(0, displayText.length - 1));
         } else {
-          // Texte effacé, passer au suivant
           setIsDeleting(false);
           setCurrentIndex((prev) => (prev + 1) % texts.length);
         }
@@ -61,10 +56,8 @@ return (
 const navigate = useNavigate()
 
 const GoToLogin = () => {
-    navigate("Loginandregister")
+    navigate("/Loginandregister")
 }
-
-
 
   const typewriterTexts = [
     "Bienvenue sur MyEEBDevent",
@@ -84,9 +77,6 @@ const GoToLogin = () => {
       <header className="container mx-auto px-6 py-6">
         <nav className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            {/* <span className="text-2xl font-bold text-white">
-              My<span className="text-white">EEBD</span><span className="text-blue-400">event</span>
-            </span> */}
             <img src={logo} alt="MyEEBDevent" className="h-10 w-auto" />
           </div>
           
@@ -103,10 +93,7 @@ const GoToLogin = () => {
 
       <section className="container mx-auto px-6 py-20 text-center">
         <div className="max-w-4xl mx-auto">
-          {/* <h1 className="text-5xl md:text-7xl font-bold text-white mb-6">
-            MyEEBD<span className="text-blue-400">event</span>
-          </h1> */}
-          {/* <img src={logo} alt="MyEEBDevent" className="h-10 w-auto" /> */}
+
           
           <div className="text-3xl md:text-4xl font-semibold text-white mb-8 h-16 flex items-center justify-center">
             <TypewriterText texts={typewriterTexts} speed={80} deleteSpeed={40} pauseTime={2000} />
